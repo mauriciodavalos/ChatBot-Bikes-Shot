@@ -9,7 +9,7 @@ const QRPortalWeb = require('@bot-whatsapp/portal');
 const BaileysProvider = require('@bot-whatsapp/provider/baileys');
 const MockAdapter = require('@bot-whatsapp/database/mock');
 
-const flowSecundario = addKeyword(['2', 'siguiente', 'asesoria'])
+const flowSecundario = addKeyword(['2', 'siguiente', 'Asesoría'])
   .addAnswer(
     [
       '¿En qué te podemos ayudar?',
@@ -58,7 +58,7 @@ const flowProds = addKeyword([
       'Comprar en nuestra tienda en linea',
       '🚲https://bikesshot.store/🏍️',
       '',
-      '👉Escribe *asesoria* para cualquier otra duda o comentario',
+      '👉Escribe *2* para cualquier otra duda o comentario',
       '',
       'Para volver al menu inicial escribe *empezar*',
     ],
@@ -87,7 +87,7 @@ const flowKits = addKeyword([
       '',
       'Recuerda que todos los Kits cuentan con Envio Gratis y puedes modificarlos a tus necesidades y/o preferencias',
       '',
-      '👉Escribe *asesoria* para cualquier otra duda o comentario',
+      '👉Escribe *2* para cualquier otra duda o comentario',
       '',
       'Para volver al menu inicial escribe *empezar*',
     ],
@@ -112,7 +112,7 @@ const flowSIpedido = addKeyword(['5', 'Vamos'])
       'Guarda el documento y envialo al siguiente mail:',
       'contacto@bikesshot.com',
       '',
-      '👉Escribe *asesoria* para cualquier otra duda o comentario',
+      '👉Escribe *2* para cualquier otra duda o comentario',
       '',
       'Para volver a este menu inicial escribe *empezar*',
     ],
@@ -186,23 +186,19 @@ const flowString = addKeyword(['string'])
 
 const flowPrincipal = addKeyword(['hola', 'empezar'])
   .addAnswer('🙌 Hola bienvenido a Bikes Shot')
-  .addAnswer('¿Cuentame que te interesa?', {
-    buttons: [
-      { body: 'Precios y Catalogo' },
-      { body: 'Kits y Promociones' },
-      { body: 'Quiero ser Distribuidor' },
-    ],
-  })
-  .addAnswer(
-    [
-      '👉Escribe *asesoria* para cualquier otra duda o comentario',
-      '',
-      'Para volver a este menu inicial escribe *empezar*',
-    ],
-    null,
-    null,
-    [flowProds, flowKits, flowMayoreo, flowAsesoria, flowString]
-  );
+  .addAnswer([
+    '¿Cuentame que te interesa?',
+    '👉 *1*  Precios y Catalogo',
+    '👉 *2* Kits y Promociones',
+    '👉 *3* Quiero ser Distribuidor',
+  ])
+  .addAnswer(['*Escribe el numero de la opcion deseada'], null, null, [
+    flowProds,
+    flowKits,
+    flowMayoreo,
+    flowAsesoria,
+    flowString,
+  ]);
 
 const main = async () => {
   const adapterDB = new MockAdapter();
